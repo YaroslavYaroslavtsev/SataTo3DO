@@ -45,8 +45,9 @@ pico_generate_pio_header(SataTo3DO ${CMAKE_CURRENT_LIST_DIR}/src/interfaces/read
 
 # enable usb output, disable uart output
 # pico_enable_stdio_usb(SataTo3DO 1)
-option(USE_DEBUG "Use the UART RX/TX" OFF)
+option(USE_DEBUG "Use the UART RX/TX" ON)
 if (USE_DEBUG)
+  message("DEBUG UART enabled")
   add_definitions("-DUSE_TRACE")
   pico_enable_stdio_uart(SataTo3DO 1)
 endif()

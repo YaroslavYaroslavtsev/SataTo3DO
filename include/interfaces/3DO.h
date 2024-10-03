@@ -27,6 +27,7 @@
 #define EJECT_3V 26
 #define DIR_DATA 27
 
+//В FZ-10 не используется
 #define XTRA0 16
 #define XTRA1 18
 #define XTRA2 17
