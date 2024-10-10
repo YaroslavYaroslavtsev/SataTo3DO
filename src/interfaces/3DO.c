@@ -308,26 +308,6 @@ uint32_t get3doData() {
   return val;
 }
 
-void print_dma_ctrl(dma_channel_hw_t *channel) {
-    uint32_t ctrl = channel->ctrl_trig;
-    int rgsz = (ctrl & DMA_CH0_CTRL_TRIG_RING_SIZE_BITS) >> DMA_CH0_CTRL_TRIG_RING_SIZE_LSB;
-    LOG_SATA("(%08x) ber %d rer %d wer %d busy %d trq %d cto %d rgsl %d rgsz %d inw %d inr %d sz %d hip %d en %d",
-           (uint) ctrl,
-           ctrl & DMA_CH0_CTRL_TRIG_AHB_ERROR_BITS ? 1 : 0,
-           ctrl & DMA_CH0_CTRL_TRIG_READ_ERROR_BITS ? 1 : 0,
-           ctrl & DMA_CH0_CTRL_TRIG_WRITE_ERROR_BITS ? 1 : 0,
-           ctrl & DMA_CH0_CTRL_TRIG_BUSY_BITS ? 1 : 0,
-           (int) ((ctrl & DMA_CH0_CTRL_TRIG_TREQ_SEL_BITS) >> DMA_CH0_CTRL_TRIG_TREQ_SEL_LSB),
-           (int) ((ctrl & DMA_CH0_CTRL_TRIG_CHAIN_TO_BITS) >> DMA_CH0_CTRL_TRIG_CHAIN_TO_LSB),
-           ctrl & DMA_CH0_CTRL_TRIG_RING_SEL_BITS ? 1 : 0,
-           rgsz ? (1 << rgsz) : 0,
-           ctrl & DMA_CH0_CTRL_TRIG_INCR_WRITE_BITS ? 1 : 0,
-           ctrl & DMA_CH0_CTRL_TRIG_INCR_READ_BITS ? 1 : 0,
-           1 << ((ctrl & DMA_CH0_CTRL_TRIG_DATA_SIZE_BITS) >> DMA_CH0_CTRL_TRIG_DATA_SIZE_LSB),
-           ctrl & DMA_CH0_CTRL_TRIG_HIGH_PRIORITY_BITS ? 1 : 0,
-           ctrl & DMA_CH0_CTRL_TRIG_EN_BITS ? 1 : 0);
-}
-
 void setDataDir(int value) {
   gpio_put(DIR_DATA, value);
   if (value == DATA_IN) {
@@ -1063,14 +1043,14 @@ what's your reply to 0x83?
       LOG_SATA("EXT_ID\n");
       buffer[index++] = EXT_ID;
       buffer[index++] = 0x1; //Where is located the boot.iso microsd=1, usbmsc=2, flash=4, sata=8
-      buffer[index++] = 'L';
-      buffer[index++] = 'O';
-      buffer[index++] = 'C';
-      buffer[index++] = 'O';
+      buffer[index++] = 'S';
       buffer[index++] = 'D';
-      buffer[index++] = 'E';
-      buffer[index++] = 1; //rev major
-      buffer[index++] = 1; //rev minor
+      buffer[index++] = '0';
+      buffer[index++] = '0';
+      buffer[index++] = '1';
+      buffer[index++] = '#';
+      buffer[index++] = 2; //rev major
+      buffer[index++] = 0; //rev minor
       buffer[index++] = 0; //rev patch
       buffer[index++] = status;
       sendAnswer(buffer, index, CHAN_WRITE_STATUS);

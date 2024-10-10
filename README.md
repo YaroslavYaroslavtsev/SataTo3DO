@@ -48,3 +48,9 @@ Copy your desired game ISOs to the USB disk.
 There is no sorting algorithm supported, so the order displayed on the 3DO will follow the FAT entry order. This means the first game you will transfer to the USB stick will be the first one in the list.
 
 Do not hesitate to contribute with MR.
+
+## Debug
+
+``` bash
+https://github.com/openocd-org/openocd/releases/download/v0.12.0/openocd-v0.12.0-i686-w64-mingw32.tar.gz
+```
